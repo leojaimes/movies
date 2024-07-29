@@ -34,7 +34,7 @@ escribir en la terminal:
 
 # Arrancar la app con detección de cambios y visible en la red
 
-escribir en la terminal: y dentro de la carpeta venv
+escribir en la terminal en \movies
 
 ```
 uvicorn app.main:app --host 0.0.0.0 --port 5000 --reload
