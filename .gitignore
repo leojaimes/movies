@@ -1,0 +1,18 @@
+# Ignorar entornos virtuales
+venv/
+.Venv/
+ENV/
+env/
+ENV.bak/
+venv.bak/
+.venv.bak/
+# Ignorar archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+# Ignorar archivos de configuración de IDE
+
+.idea/
+*.swp
+# Ignorar otros archivos innecesarios
+__pycache__/
+*.pyc
