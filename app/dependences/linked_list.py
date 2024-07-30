@@ -1,3 +1,4 @@
+# https://www.youtube.com/watch?v=oXuKUkIlv_o
 class Node:
     def __init__(self, value: int, nextNode: "Node" = None) -> None:
         self.value = value
@@ -60,6 +61,12 @@ class LinkedList:
 
         self._size -= 1
 
+    ##
+    ##
+    ##
+    ##
+    ##
+    ##
     def print_list(self):
         currentNode = self._firstNode
         while currentNode is not None:
