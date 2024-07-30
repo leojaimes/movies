@@ -23,12 +23,12 @@ def calculateTime(func):
         initTime = time.time()
         func(n)
         endTime = time.time()
-        print(f"Execution Time { endTime - initTime} seconds")
+        print(f"Execution  Time { endTime - initTime} seconds")
 
     return modifiedFunction
 
 
-@calculateTime
+@calculateTime  # using decorator
 def imprimirNumeros(n):
     for i in range(n):
         print(i)
