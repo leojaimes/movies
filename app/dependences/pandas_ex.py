@@ -1,17 +1,9 @@
 import pandas as pd
 from pymongo import MongoClient
-from dotenv import load_dotenv
-import os
+from app.config import Config
 
 
-# load enviroment variables from .env file
-load_dotenv()
-
-# read MONGO_DB_URI environment var
-mongo_uri = os.getenv("MONGO_DB_URI")
-
-
-client = MongoClient(mongo_uri)
+client = MongoClient(Config.MONGO_DB_URI)
 
 db = client["teslo"]
 collection = db["products"]
@@ -19,8 +11,6 @@ data = list(collection.find())
 
 
 df = pd.DataFrame(data)
-
-print(df)
 
 
 # dataFrame = pd.read_csv("meaningful_output.csv", index_col="id")
