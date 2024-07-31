@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from app.routers import user_router
 from app.routers import movies_router
+from app.routers import products_router
 
 app = FastAPI()
 
@@ -16,3 +17,4 @@ def home():
 
 app.include_router(user_router.router)
 app.include_router(movies_router.router)
+app.include_router(products_router.router)
