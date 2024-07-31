@@ -16,3 +16,5 @@ Thumbs.db
 # Ignorar otros archivos innecesarios
 __pycache__/
 *.pyc
+
+.env
