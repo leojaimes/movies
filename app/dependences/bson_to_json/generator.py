@@ -1,6 +1,15 @@
-from typing import List, Dict
+from typing import Callable
 from bson import ObjectId, json_util
-from app.dependences.bson_to_json.generator import convert_bson_to_json_compatible
+from functools import wraps
+
+
+def bson_to_json_compatible(func: Callable):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return convert_bson_to_json_compatible(result)
+
+    return wrapper
 
 
 def convert_bson_to_json_compatible(data):
@@ -17,11 +26,3 @@ def convert_bson_to_json_compatible(data):
         return data.isoformat()
     else:
         return data
-
-
-def user_entity(user: Dict) -> Dict:
-    return convert_bson_to_json_compatible(user)
-
-
-def users_entity(users: List[Dict]) -> List[Dict]:
-    return [user_entity(user) for user in users]
