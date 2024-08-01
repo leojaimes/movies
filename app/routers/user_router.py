@@ -1,14 +1,15 @@
 from typing import List
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.dependences.utils import fibonnaci, userData
 from app.models.user_models import UserBase
 from app.schemas.user import user_entity, users_entity
 from app.dependences.db.db import get_collection
+from bson import ObjectId
 
 router = APIRouter()
 
 
-@router.get("/users")
+@router.get("/users", tags=["users"])
 def find_all_users():
     collection = get_collection("userwebs")
     users_db = list(collection.find({}, {"_id": 0}))
@@ -20,9 +21,18 @@ def create_user():
     return {}
 
 
-@router.get("/users/{userId}", tags=["users"])
-def find_user_by_id(userId):
-    return {"username": f"user{userId}"}
+@router.get("/users/{user_id}", tags=["users"])
+def find_user_by_id(user_id):
+    if not ObjectId.is_valid(user_id):
+        raise HTTPException(status_code=400, detail="Invalid user ID format")
+
+    collection = get_collection("userwebs")
+    user_db = collection.find_one({"_id": ObjectId(user_id)})
+
+    if user_db is None:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    return user_entity(user_db)
 
 
 @router.put("/users/{userId}")
