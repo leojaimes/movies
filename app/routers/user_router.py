@@ -6,9 +6,6 @@ from app.models.user_models import UserBase
 from app.schemas.user import user_entity, users_entity
 from app.dependences.db.db import get_collection
 from bson import ObjectId
-from bson.json_util import dumps, loads
-from bson import ObjectId
-from fastapi.responses import JSONResponse
 
 
 router = APIRouter()
@@ -37,7 +34,7 @@ def find_user_by_id(user_id):
     if user_db is None:
         raise HTTPException(status_code=404, detail="User not found")
 
-    return dumps(user_db)
+    return create_json_response(user_db)
 
 
 @router.put("/users/{userId}")
